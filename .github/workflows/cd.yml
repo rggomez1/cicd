@@ -1,0 +1,17 @@
+# Workflow to deploy the artifacts
+name: cd
+on:
+  workflow_run:
+    workflows: ["ci"]
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: rongo
+    steps:
+      - name: Deployment using docker
+        run: |
+          sudo docker rm -f web1
+          sudo docker rmi -f rggomez10/myap33:latest
+          sudo docker run -dt --name web1 -p 9000:8080 rggomez10/myap33:latest
