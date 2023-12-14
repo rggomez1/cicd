@@ -18,6 +18,7 @@ jobs:
         run: |
           mvn package
           ls -l
+      # The following uploads the artifact to this repository and can be seen in the actions for the last time this runs after we add the following
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
