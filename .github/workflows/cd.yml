@@ -9,9 +9,10 @@ on:
 jobs:
   build:
     runs-on: rongo
+    environment: prod
     steps:
-      - name: Deployment using docker
+      - uses: actions/checkout@4.1.1
+      - name: Deployment using kubernetes
         run: |
-          sudo docker rm -f web1
-          sudo docker rmi -f rggomez10/myap33:latest
-          sudo docker run -dt --name web1 -p 9000:8080 rggomez10/myap33:latest
+          kubectl apply -f deployment.yml
+          kubectl get deployments
