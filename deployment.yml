@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-deployment
+  name: ron-deployment
   labels:
     app: myapp
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: myapp
+      app: ronapp
   template:
     metadata:
       labels:
-        app: myapp
+        app: ronapp
     spec:
       containers:
-      - name: my-container
-        image: gagandeepthinknyx/dell-app1
+      - name: ron-container
+        image: rggomez10/myap33:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -24,12 +24,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: myapp
+  name: ronapp-lb
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 8080
     targetPort: 8080
-    nodePort: 31000 
   selector:
-    app: myapp 
+    app: ronapp 
